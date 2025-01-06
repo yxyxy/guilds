@@ -1,20 +1,209 @@
 version: '3.9'
 services:
-  app:
+  feed:
     build:
-      context: .
+      context: ./feed
+      dockerfile: Dockerfile
     environment:
-      DJANGO_SETTINGS_MODULE: gfeed.settings.local
+      DJANGO_SETTINGS_MODULE: feed.settings.local
       DATABASE_URL: postgres://guilds:password@db:5432/guilds
       MINIO_ENDPOINT: http://minio:9000
       MINIO_ACCESS_KEY: minioadmin
       MINIO_SECRET_KEY: minioadmin
     ports:
-      - 8000:8000
+      - "8000:8000"
     depends_on:
       - db
       - minio
-
+      - redis  
+ 
+  academy:
+    build:
+      context: ./academy
+      dockerfile: Dockerfile
+    environment:
+      DJANGO_SETTINGS_MODULE: academy.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "8001:8000"
+    depends_on:
+      - db
+      - minio
+      - redis
+ 
+  auth:
+    build:
+      context: ./auth
+      dockerfile: Dockerfile
+    environment:
+      DJANGO_SETTINGS_MODULE: auth.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "8002:8000"
+    depends_on:
+      - db
+      - minio
+      - redis  
+ 
+  career:
+    build:
+      context: ./career
+      dockerfile: Dockerfile
+    environment:
+      DJANGO_SETTINGS_MODULE: career.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "8003:8000"
+    depends_on:
+      - db
+      - minio
+      - redis
+	  
+  groups:
+    build:
+      context: ./groups
+      dockerfile: Dockerfile
+    environment:
+      DJANGO_SETTINGS_MODULE: groups.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "8004:8000"
+    depends_on:
+      - db
+      - minio
+      - redis  
+ 
+  notification:
+    build:
+      context: ./notification
+      dockerfile: Dockerfile
+    environment:
+      DJANGO_SETTINGS_MODULE: notification.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "8005:8000"
+    depends_on:
+      - db
+      - minio
+      - redis
+	  
+  profile:
+    build:
+      context: ./profile
+      dockerfile: Dockerfile
+    environment:
+      DJANGO_SETTINGS_MODULE: profile.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "8006:8000"
+    depends_on:
+      - db
+      - minio
+      - redis  
+ 
+  schedules:
+    build:
+      context: ./schedules
+      dockerfile: Dockerfile
+    environment:
+      DJANGO_SETTINGS_MODULE: schedules.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "8007:8000"
+    depends_on:
+      - db
+      - minio
+      - redis
+	  
+  strucrute:
+    build:
+      context: ./strucrute
+      dockerfile: Dockerfile
+    environment:
+      DJANGO_SETTINGS_MODULE: strucrute.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "8008:8000"
+    depends_on:
+      - db
+      - minio
+      - redis  
+ 
+  surveys:
+    build:
+      context: ./surveys
+      dockerfile: Dockerfile
+    environment:
+      DJANGO_SETTINGS_MODULE: surveys.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "8009:8000"
+    depends_on:
+      - db
+      - minio
+      - redis
+	  
+  tickets:
+    build:
+      context: ./tickets
+      dockerfile: Dockerfile
+    environment:
+      DJANGO_SETTINGS_MODULE: tickets.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "8010:8000"
+    depends_on:
+      - db
+      - minio
+      - redis  
+ 
+  vacations:
+    build:
+      context: ./vacations
+      dockerfile: Dockerfile
+    environment:
+      DJANGO_SETTINGS_MODULE: vacations.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - "8011:8000"
+    depends_on:
+      - db
+      - minio
+      - redis
+	  
   db:
     image: postgres:15
     environment:
