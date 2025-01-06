@@ -67,7 +67,7 @@ services:
       - db
       - minio
       - redis
-	  
+
   groups:
     build:
       context: ./groups
@@ -101,7 +101,7 @@ services:
       - db
       - minio
       - redis
-	  
+
   profile:
     build:
       context: ./profile
@@ -118,7 +118,7 @@ services:
       - db
       - minio
       - redis  
- 
+
   schedules:
     build:
       context: ./schedules
@@ -135,7 +135,7 @@ services:
       - db
       - minio
       - redis
-	  
+
   strucrute:
     build:
       context: ./strucrute
@@ -152,7 +152,7 @@ services:
       - db
       - minio
       - redis  
- 
+
   surveys:
     build:
       context: ./surveys
@@ -169,7 +169,7 @@ services:
       - db
       - minio
       - redis
-	  
+ 
   tickets:
     build:
       context: ./tickets
@@ -203,7 +203,7 @@ services:
       - db
       - minio
       - redis
-	  
+
   db:
     image: postgres:15
     environment:
