@@ -1,0 +1,39 @@
+version: '3.9'
+services:
+  app:
+    build:
+      context: .
+    environment:
+      DJANGO_SETTINGS_MODULE: gfeed.settings.local
+      DATABASE_URL: postgres://guilds:password@db:5432/guilds
+      MINIO_ENDPOINT: http://minio:9000
+      MINIO_ACCESS_KEY: minioadmin
+      MINIO_SECRET_KEY: minioadmin
+    ports:
+      - 8000:8000
+    depends_on:
+      - db
+      - minio
+
+  db:
+    image: postgres:15
+    environment:
+      POSTGRES_USER: guilds
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: guilds
+    ports:
+      - 5432:5432
+
+  redis:
+    image: redis:7
+    ports:
+      - 6379:6379
+
+  minio:
+    image: minio/minio:latest
+    command: server /data
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    ports:
+      - 9000:9000
