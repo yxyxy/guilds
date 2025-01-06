@@ -7,13 +7,13 @@ RUN apt-get update && apt-get install -y \
     && rm -rf /var/lib/apt/lists/*
 
 # Настройка рабочей директории
-WORKDIR /app
+WORKDIR /feed
 
 # Установим Poetry для управления зависимостями
 RUN pip install poetry
 
 # Копируем файлы проекта (пока пусто)
-COPY . .
+COPY pyproject.toml poetry.lock ./
 
 # Устанавливаем зависимости
 RUN poetry install --no-dev
