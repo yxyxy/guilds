@@ -1,0 +1,15 @@
+[tool.poetry]
+name = "feed"
+version = "0.1.0"
+description = "Feed service for Guilds platform"
+authors = ["Az1muth <yxyxy@mail.ru>"]
+
+[tool.poetry.dependencies]
+python = "^3.13"
+Django = "^4.2"
+psycopg2-binary = "^2.9"
+redis = "^4.5"
+
+[build-system]
+requires = ["poetry>=1.1.0"]
+build-backend = "poetry.core.masonry.api"
