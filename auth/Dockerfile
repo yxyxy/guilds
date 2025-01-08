@@ -13,10 +13,10 @@ WORKDIR /app
 RUN pip install poetry
 
 # Копируем файлы проекта (пока пусто)
-COPY . .
+COPY pyproject.toml poetry.lock ./
 
 # Устанавливаем зависимости
-RUN poetry install --no-dev
+RUN poetry install -v
 
 # Запускаем приложение
 CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]

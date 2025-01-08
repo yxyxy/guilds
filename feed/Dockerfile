@@ -16,7 +16,7 @@ RUN pip install poetry
 COPY pyproject.toml poetry.lock ./
 
 # Устанавливаем зависимости
-RUN poetry install --no-dev
+RUN poetry install -v
 
 # Запускаем приложение
 CMD ["poetry", "run", "python", "manage.py", "runserver", "0.0.0.0:8000"]

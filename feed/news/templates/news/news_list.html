@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>News List</title>
+</head>
+<body>
+    <h1>News</h1>
+
+    <!-- Список новостей -->
+    <div>
+        {% for item in news %}
+            <div>
+                <h2>{{ item.title }}</h2>
+                <p>{{ item.content }}</p>
+                <small>{{ item.created_at }}</small>
+            </div>
+            <hr>
+        {% empty %}
+            <p>No news available.</p>
+        {% endfor %}
+    </div>
+
+    <!-- Форма добавления новости -->
+    <div>
+        <h2>Add a News</h2>
+
+        <!-- Если есть ошибки, отображаем их -->
+        {% if form.errors %}
+            <div style="color: red;">
+                <ul>
+                    {% for field, errors in form.errors.items %}
+                        <li>
+                            <strong>{{ field }}:</strong>
+                            {% for error in errors %}
+                                {{ error }}
+                            {% endfor %}
+                        </li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+
+        <!-- Форма -->
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">Add News</button>
+        </form>
+    </div>
+</body>
+</html>
