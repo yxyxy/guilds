@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:alpine3.21
+    container_name: auth-postgres
+    environment:
+      POSTGRES_USER: auth_user
+      POSTGRES_PASSWORD: auth_password
+      POSTGRES_DB: auth_db
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  django:
+    build:
+      context: .
+      dockerfile: deployment/Dockerfile
+    container_name: auth-django
+    environment:
+      SECRET_KEY: "super-secret-key"
+      DEBUG: "True"
+      ALLOWED_HOSTS: "localhost,127.0.0.1"
+      DB_NAME: "auth_db"
+      DB_USER: "auth_user"
+      DB_PASSWORD: "auth_password"
+      DB_HOST: "postgres"
+      DB_PORT: "5432"
+    depends_on:
+      - postgres
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/guilds
+      - D:/guilds:/app:rw
+
+volumes:
+  postgres_data:
