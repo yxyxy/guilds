@@ -1,6 +1,6 @@
 from django.http import JsonResponse
-from .ldap_integration import ldap_authenticate
-from .oauth_providers import google, apple
+from auth_service.app.ldap_integration import ldap_authenticate
+from auth_service.app.oauth_providers import google, apple
 from .ab_testing import assign_ab_segment
 
 def ldap_login(request):

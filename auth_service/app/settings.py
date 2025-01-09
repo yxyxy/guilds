@@ -13,7 +13,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'app',
+    'auth_service',
 ]
 
 MIDDLEWARE = [
@@ -24,7 +24,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'app.middleware.CustomMiddleware',
+    'auth_service.app.middleware.CustomMiddleware',
 ]
 
 ROOT_URLCONF = 'auth_service.app.urls'
